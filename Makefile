@@ -5,9 +5,24 @@
 ## makefile
 ##
 
-SRC		=		main.c 	\
+MAIN	=		main.c	\
+
+SRC		=		$(MATCH)	\
+				$(MY)
+
+CFLAGS	=	-g3
+
+MATCH	=		./lib/match_function/loading_map.c	\
+
+MY		=		./lib/my/my_getnbr.c		\
+				./lib/my/my_put_nbr.c	\
+				./lib/my/my_putchar.c	\
+				./lib/my/my_strlen.c
+
 
 UNIT 	=		./tests/test.c 	\
+
+LIBMY	=		./lib/my/libmy.a
 
 OBJ 	= $(SRC:.c=.o)
 
@@ -16,12 +31,16 @@ CC 		= gcc
 NAME	=		matchstick
 
 all:	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ)
+	ar rc $(LIBMY) $(OBJ)
+	$(CC) -o $(NAME) $(MAIN) $(LIBMY) $(CFLAGS)
 
 clean:
 		rm -rf *.o
+		rm -rf lib/my/*.o
+		rm -rf lib/match_function/*.o
 
 fclean: clean
 		rm -f $(NAME)
+		rm -f $(LIBMY)
 
 re: 	fclean all
