@@ -13,11 +13,14 @@ SRC		=		$(MATCH)	\
 CFLAGS	=	-g3
 
 MATCH	=		./lib/match_function/loading_map.c	\
+				./lib/match_function/error.c		\
+				./lib/match_function/move.c
 
 MY		=		./lib/my/my_getnbr.c		\
 				./lib/my/my_put_nbr.c	\
 				./lib/my/my_putchar.c	\
-				./lib/my/my_strlen.c
+				./lib/my/my_strlen.c	\
+				./lib/my/my_str_isnum.c
 
 
 UNIT 	=		./tests/test.c 	\

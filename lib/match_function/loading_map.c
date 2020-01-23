@@ -46,29 +46,14 @@ char **print_game_board(int nb_line)
         else
             fill_middle(tab[j], j, nb_el / 2 + 1, nb_el);
     }
-    for (int i = 0; i < line; i += 1) {
-        write(1, tab[i], my_strlen(tab[i]));
-        write(1, "\n", 1);
-    }
+    print_board(tab, line);
     return (tab);
 }
 
-void print_updated_board_game(char **tab, int line , int nb_matches)
+void print_board(char **map, int size)
 {
-    int i = 0;
-    for (; tab[line][i] != '|'; i += 1);
-    for (; tab[line][i] == '|'; i += 1);
-    i -= 1;
-
-    write (1, "Player removed ", 15);
-    my_put_nbr(nb_matches);
-    write(1, " match(es) from line ", 21);
-    my_put_nbr(line);
-    write(1, "\n", 1);
-    for (int j = i; nb_matches > 0; j -= 1) {
-        tab[line][j] = ' ';
-        nb_matches -= 1;
+    for (int i = 0; i < size; i += 1) {
+        write(1, map[i], my_strlen(map[i]));
+        write(1, "\n", 1);
     }
-    for (int i = 0; tab[i]; i += 1)
-        write(1, tab[i], my_strlen(tab[i]));
 }
