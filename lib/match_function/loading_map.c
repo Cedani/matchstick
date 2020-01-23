@@ -58,3 +58,11 @@ void print_board(char **map, int size)
     }
     write(1, "\n", 1);
 }
+
+int error_arg(char **argv)
+{
+    for (int i = 1; argv[i]; i += 1)
+        if (my_str_isnum(argv[i]) == 1)
+            return (84);
+    return (0);
+}

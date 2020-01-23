@@ -26,4 +26,5 @@ int error_matches(char *buffer, int nb_max, int line, char **map);
 int check_win(char **tab, int size);
 void moves(char **map, int nb_max, int line);
 void ia_move(char **map, int size, int todo);
+int error_arg(char **argv);
 #endif /* !MATCHSTICK */
