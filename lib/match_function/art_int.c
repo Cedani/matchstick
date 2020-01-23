@@ -14,7 +14,7 @@ void remove_pipe_ia(char **map, int line, int size)
     for (; map[line][i] != '|'; i += 1);
     for (; map[line][i] == '|'; i += 1);
     i -= 1;
-    write (1, "IA removed 1", 12);
+    write (1, "AI removed 1", 12);
     write(1, " match(es) from line ", 21);
     my_put_nbr(line);
     write(1, "\n", 1);
@@ -40,6 +40,6 @@ void ia_move(char **map, int size, int todo)
 
     if (todo == 1)
         return;
-    write(1, "IA turn...\n", 11);
+    write(1, "AI's turn...\n", 13);
     remove_pipe_ia(map, line, size);
 }

@@ -44,6 +44,7 @@ void moves(char **map, int nb_max, int line)
     int given_line = 0;
 
     while (usl != -1 && check_win(map, line) != 0) {
+        write(1, "Your Turn : \n", 13);
         write(1, "Line: ", 6);
         usl = getline(&buffer, &usl, stdin);
         if (usl != -1)
