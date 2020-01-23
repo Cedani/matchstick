@@ -17,6 +17,5 @@ int main(int argc, char **argv)
         return (84);
     }
     char **map = print_game_board(my_getnbr(argv[1]));
-    moves(map, my_getnbr(argv[2]), my_getnbr(argv[1]));
-    return (0);
+    return (moves(map, my_getnbr(argv[2]), my_getnbr(argv[1])));
 }

@@ -37,7 +37,7 @@ int error_line(char *buffer, int line)
         return (1);
     }
     i = my_getnbr(buffer);
-    if (i <= 0 || i > line - 1) {
+    if (i <= 0 || i > line) {
         write(1, "Error: this line is out of range\n", 33);
         return (1);
     }
