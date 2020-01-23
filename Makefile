@@ -14,7 +14,8 @@ CFLAGS	=	-g3
 
 MATCH	=		./lib/match_function/loading_map.c	\
 				./lib/match_function/error.c		\
-				./lib/match_function/move.c
+				./lib/match_function/move.c			\
+				./lib/match_function/art_int.c
 
 MY		=		./lib/my/my_getnbr.c		\
 				./lib/my/my_put_nbr.c	\

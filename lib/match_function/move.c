@@ -56,5 +56,6 @@ void moves(char **map, int nb_max, int line)
         }
         if (check != 1)
             print_updated_board_game(map, ok, my_getnbr(buffer), line);
+        ia_move(map, line + 2, check);
     }
 }
