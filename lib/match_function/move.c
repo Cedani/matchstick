@@ -40,12 +40,13 @@ int moves(char **map, int nb_max, int line)
     char *buffer = NULL;
     size_t usl = 0;
     int ok = 0;
-    int check = 1;
+    int check = 2;
     int given_line = 0;
     int ret;
 
     while (usl != -1 && check_win(map, line + 2) != 0) {
-        write(1, "Your Turn : \n", 13);
+        if (check == 2)
+            write(1, "Your Turn: \n", 13);
         write(1, "Line: ", 6);
         usl = getline(&buffer, &usl, stdin);
         if (usl != -1)
@@ -58,14 +59,15 @@ int moves(char **map, int nb_max, int line)
         }
         if (check != 1) {
             print_updated_board_game(map, ok, my_getnbr(buffer), line);
+            check = 2;
             if (check_win(map, line + 2) == 0) {
-                write(1, "Player Lost\n", 12);
+                write(1, "You lost, too bad...\n", 21);
                 return (2);
             }
         }
         ia_move(map, line + 2, check);
         if (check_win(map, line + 2) == 0) {
-            write(1, "AI lost\n", 8);
+            write(1, "I lost... snif... but I'll get you next time!!\n", 47);
             return (1);
         }
     }

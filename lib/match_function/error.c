@@ -20,7 +20,7 @@ int det_nb_line(char **tab, int line)
 int check_minus(char *buffer)
 {
     for (int i = 0; buffer[i] != '\n'; i += 1) {
-        if (buffer[i] == '-' && i != 0)
+        if (buffer[i] == '-')
             return (1);
     }
     return (0);
