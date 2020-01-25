@@ -51,6 +51,8 @@ int moves(char **map, int nb_max, int line)
         usl = getline(&buffer, &usl, stdin);
         if (usl != -1)
             check = error_line(buffer, line);
+        else
+            check = 1;
         if (check != 1) {
             ok = my_getnbr(buffer);
             write(1, "Matches: ", 9);
@@ -71,4 +73,5 @@ int moves(char **map, int nb_max, int line)
             return (1);
         }
     }
+    return (0);
 }
