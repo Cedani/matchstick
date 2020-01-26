@@ -56,7 +56,8 @@ void print_board(char **map, int size)
         write(1, map[i], my_strlen(map[i]));
         write(1, "\n", 1);
     }
-    write(1, "\n", 1);
+    if (check_win(map, size) != 0)
+        write(1, "\n", 1);
 }
 
 int error_arg(char **argv)
