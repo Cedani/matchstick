@@ -35,7 +35,7 @@ char **print_game_board(int nb_line)
     int line = nb_line + 2;
     int nb_el = 1;
     int j = 0;
-    char **tab = malloc(sizeof(*tab) * line);
+    char **tab = malloc(sizeof(char *) * line + 1);
 
     for (int i = 0; i < line - 2; i += 1)
         nb_el += 2;

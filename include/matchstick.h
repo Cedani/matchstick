@@ -12,6 +12,17 @@
 #include <unistd.h>
 #include <stdio.h>
 
+typedef struct move_s {
+    int check;
+    size_t usl;
+    char *buffer;
+    int line;
+    int ok;
+    int ret;
+    int nb_max;
+    int line_max;
+} move_t;
+
 int my_getnbr(char const *str);
 int my_strlen(char const *str);
 int my_put_nbr(int nb);

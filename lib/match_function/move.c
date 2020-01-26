@@ -26,6 +26,39 @@ void print_updated_board_game(char **tab, int line, int nb_matches, int size)
     print_board(tab, size + 2);
 }
 
+void pl_ia_move(move_t *pl, char **map)
+{
+    if (pl->ret != 2) {
+        ia_move(map, pl->line_max + 2, pl->check);
+        if (check_win(map, pl->line_max + 2) == 0) {
+            write(1, "I lost... snif... but I'll get you next time!!", 47);
+            pl->ret = 1;
+        }
+    }
+}
+
+int match_input(char **map, move_t *pl)
+{
+    pl->line = my_getnbr(pl->buffer);
+    pl->check = 1;
+
+    write(1, "Matches: ", 9);
+    pl->usl = getline(&pl->buffer, &pl->usl, stdin);
+    if (pl->usl != -1) {
+        pl->check = error_matches(pl->buffer, pl->nb_max, pl->line, map);
+        pl->ok = my_getnbr(pl->buffer);
+    }
+    if (pl->check != 1) {
+        print_updated_board_game(map, pl->line, pl->ok, pl->line_max);
+        pl->check = 2;
+        if (check_win(map, pl->line_max + 2) == 0) {
+            write(1, "You lost, too bad...", 21);
+            pl->ret = 2;
+        }
+    }
+    pl_ia_move(pl, map);
+}
+
 int check_win(char **tab, int size)
 {
     for (int i = 0; i < size; i += 1)
@@ -37,41 +70,24 @@ int check_win(char **tab, int size)
 
 int moves(char **map, int nb_max, int line)
 {
-    char *buffer = NULL;
-    size_t usl = 0;
-    int ok = 0;
-    int check = 2;
-    int given_line = 0;
-    int ret;
+    move_t *pl = malloc(sizeof(*pl));
+    pl->check = 2;
+    pl->ret = 0;
+    pl->line_max = line;
+    pl->nb_max = nb_max;
 
-    while (usl != -1 && check_win(map, line + 2) != 0) {
-        if (check == 2)
+    while (check_win(map, line + 2) != 0 && pl->usl != -1) {
+        if (pl->check == 2)
             write(1, "Your Turn: \n", 13);
         write(1, "Line: ", 6);
-        usl = getline(&buffer, &usl, stdin);
-        if (usl != -1)
-            check = error_line(buffer, line);
-        else
-            check = 1;
-        if (check != 1) {
-            ok = my_getnbr(buffer);
-            write(1, "Matches: ", 9);
-            getline(&buffer, &usl, stdin);
-            check = error_matches(buffer, nb_max, ok, map);
-        }
-        if (check != 1) {
-            print_updated_board_game(map, ok, my_getnbr(buffer), line);
-            check = 2;
-            if (check_win(map, line + 2) == 0) {
-                write(1, "You lost, too bad...\n", 21);
-                return (2);
-            }
-        }
-        ia_move(map, line + 2, check);
-        if (check_win(map, line + 2) == 0) {
-            write(1, "I lost... snif... but I'll get you next time!!\n", 47);
-            return (1);
-        }
+        pl->check = 1;
+        pl->usl = getline(&pl->buffer, &pl->usl, stdin);
+        if (pl->usl != -1)
+            pl->check = error_line(pl->buffer, line);
+        if (pl->check != 1)
+            match_input(map, pl);
+        if (pl->ret != 0)
+            return (pl->ret);
     }
-    return (0);
+    return (pl->ret);
 }
