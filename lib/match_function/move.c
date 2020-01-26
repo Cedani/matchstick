@@ -31,7 +31,7 @@ void pl_ia_move(move_t *pl, char **map)
     if (pl->ret != 2) {
         ia_move(map, pl->line_max + 2, pl->check);
         if (check_win(map, pl->line_max + 2) == 0) {
-            write(1, "I lost... snif... but I'll get you next time!\n", 47);
+            write(1, "I lost... snif... but I'll get you next time!\n", 46);
             pl->ret = 1;
         }
     }
